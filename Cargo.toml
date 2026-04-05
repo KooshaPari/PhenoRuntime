@@ -1,0 +1,9 @@
+[package]
+name = "pheno-runtime"
+version = "0.1.0"
+edition = "2024"
+description = "Phenotype runtime - daemon, skills"
+
+[workspace]
+members = ["crates/*"]
+resolver = "3"

@@ -1,0 +1,5 @@
+{
+  "name": "@phenotype/runtime",
+  "version": "0.1.0",
+  "description": "Runtime TypeScript SDK"
+}
