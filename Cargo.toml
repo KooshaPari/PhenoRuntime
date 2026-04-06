@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2024"
 description = "PhenoRuntime - Daemon, Skills, WASM"
 
-[lib]
-path = "crates/pheno-runtime-core/src/lib.rs"
+[[bin]]
+name = "pheno-runtime"
+path = "src/main.rs"
 
 [workspace]
 members = ["crates/*"]
