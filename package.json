@@ -1,5 +1,6 @@
 {
   "name": "@phenotype/runtime",
   "version": "0.1.0",
-  "description": "Runtime TypeScript SDK"
+  "description": "Runtime TypeScript SDK",
+  "license": "MIT OR Apache-2.0"
 }
