@@ -1,8 +1,8 @@
 # PhenoRuntime
 
-Runtime substrate for the Phenotype ecosystem — daemon, skills, and the adapter crates that sit between Phenotype agents and their backing services (LLMs, MCP servers, object storage, event bus, and document store).
+Runtime substrate and adapter layer for the Phenotype ecosystem — pluggable crates providing LLM routing, MCP server hosting, event bus integration, and persistence adapters that bridge Phenotype agents with backing services.
 
-**Part of the [Phenotype org](https://github.com/KooshaPari) ecosystem.** Shares CI reusables and conventions with [phenoShared](https://github.com/KooshaPari/phenoShared) and the broader polyrepo. Follows org conventions: conventional commits, `<type>/<topic>` branching, Apache-2.0 + MIT dual license.
+**Part of the [Phenotype org](https://github.com/KooshaPari) ecosystem.** Shares governance, CI reusables, and conventions with [phenoShared](../phenoShared/) and the broader Phenotype polyrepo. Follows org standards: conventional commits, feature branching, Apache-2.0 + MIT dual licensing.
 
 ## What it does
 
@@ -70,6 +70,42 @@ CHARTER.md                # Scope and ownership
 - **Trait-first adapters.** Public surfaces are traits; implementations are behind feature flags where practical.
 - **Fail loudly.** Required config failures are hard errors — no silent fallback to in-memory stubs in production builds.
 - **Hexagonal-friendly.** Adapters slot behind ports defined in [phenoShared](https://github.com/KooshaPari/phenoShared)'s `phenotype-port-interfaces`.
+
+## Technology Stack
+
+- **Language**: Rust (edition 2021, stable 1.80+)
+- **Async Runtime**: Tokio with multi-threaded scheduler
+- **Serialization**: serde + serde_json for all data contracts
+- **Error Handling**: thiserror for composable error types
+- **Testing**: criterion for benchmarks, proptest for property testing
+- **Workspace Management**: cargo workspace with unified dependency pinning
+- **External Dependencies**: Minimal — pinned to latest stable versions
+
+## Key Characteristics
+
+- **Zero Inter-Crate Coupling**: Each adapter (MCP, LLM, NATS, MinIO, SurrealDB) is self-contained
+- **Trait-First Design**: Public APIs are abstract traits; implementations are concrete structs
+- **Production-Grade Error Handling**: No silent fallbacks; required config failures are hard errors
+- **Hexagonal Alignment**: Adapters implement ports defined in phenoShared's `phenotype-port-interfaces`
+- **Independent Consumability**: Use any single crate without pulling transitive dependencies
+- **Integration Testing**: Optional feature flags gate integration tests requiring external services
+
+## Related Phenotype Projects
+
+- **[phenoShared](../phenoShared/)** — Port interfaces and shared infrastructure; PhenoRuntime implements ports
+- **[agileplus-agents](../agileplus-agents/)** — Primary consumer of phenotype-llm and phenotype-mcp-server
+- **[Sidekick](../Sidekick/)** — Agent framework; uses PhenoRuntime adapters
+- **[PhenoObservability](../PhenoObservability/)** — Integration point for tracing and metrics
+
+## Governance & Contributing
+
+- **CLAUDE.md** — Workspace conventions and contributor guidelines
+- **AGENTS.md** — Agent operating contract and testing workflow
+- **ADR.md** — Architecture decision records for major design choices
+- **PRD.md** — Product requirements and roadmap
+- **CONTRIBUTING.md** — Detailed contribution workflow
+- **SECURITY.md** — Security vulnerability reporting
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
 ## Contributing
 
