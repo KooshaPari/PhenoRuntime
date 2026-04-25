@@ -1,5 +1,5 @@
 [package]
-rust-version = "1.75"
+rust-version = "1.85"
 name = "pheno-runtime"
 version = "0.1.0"
 edition = "2024"
