@@ -1,5 +1,9 @@
 # PhenoRuntime
 
+[![License: MIT or Apache-2.0](https://img.shields.io/badge/License-MIT%20or%20Apache--2.0-yellow.svg)](LICENSE-MIT)
+[![CI](https://github.com/KooshaPari/PhenoRuntime/actions/workflows/ci.yml/badge.svg)](https://github.com/KooshaPari/PhenoRuntime/actions/workflows/ci.yml)
+[![Rust](https://img.shields.io/badge/rust-1.75%2B-orange.svg)](https://www.rust-lang.org)
+
 Runtime substrate and adapter layer for the Phenotype ecosystem — pluggable crates providing LLM routing, MCP server hosting, event bus integration, and persistence adapters that bridge Phenotype agents with backing services.
 
 **Part of the [Phenotype org](https://github.com/KooshaPari) ecosystem.** Shares governance, CI reusables, and conventions with [phenoShared](../phenoShared/) and the broader Phenotype polyrepo. Follows org standards: conventional commits, feature branching, Apache-2.0 + MIT dual licensing.
