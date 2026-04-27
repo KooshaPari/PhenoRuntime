@@ -1,6 +1,7 @@
 # AGENTS.md — PhenoRuntime
 
-- **Location:** [Relative p
+PhenoRuntime is the Phenotype runtime scaffold for daemon, service, package, and
+skill runtime work.
 
 ## Quick Links
 
