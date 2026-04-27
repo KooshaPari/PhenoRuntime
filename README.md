@@ -40,6 +40,13 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo fmt --all -- --check
 ```
 
+For docs work, use Bun:
+
+```bash
+bun install
+bun run docs:build
+```
+
 Use an individual crate as a dependency:
 
 ```toml
@@ -100,6 +107,11 @@ CHARTER.md                # Scope and ownership
 - **[agileplus-agents](../agileplus-agents/)** — Primary consumer of phenotype-llm and phenotype-mcp-server
 - **[Sidekick](../Sidekick/)** — Agent framework; uses PhenoRuntime adapters
 - **[PhenoObservability](../PhenoObservability/)** — Integration point for tracing and metrics
+
+## Docs surface
+
+The `docs/` tree now serves as the repository docs landing surface. It exposes
+the runtime ADRs, research notes, and worklog index through VitePress.
 
 ## Governance & Contributing
 
