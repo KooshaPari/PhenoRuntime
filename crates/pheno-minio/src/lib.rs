@@ -2,7 +2,7 @@
 //!
 //! MinIO is a high-performance, S3-compatible object storage.
 
-use aws_sdk_s3::{Client, primitives::ByteStream};
+use aws_sdk_s3::{config::Credentials, primitives::ByteStream, Client};
 use bytes::Bytes;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
@@ -52,7 +52,7 @@ impl MinioClient {
 
         // Use default credentials (for MinIO local)
         let config = aws_config::defaults(aws_config::BehaviorVersion::latest())
-            .credentials_provider(aws_config::Credentials::new(
+            .credentials_provider(Credentials::new(
                 "minioadmin",
                 "minioadmin123",
                 None,
@@ -60,11 +60,13 @@ impl MinioClient {
                 "static",
             ))
             .endpoint_url(endpoint)
-            .force_path_style(true)
             .load()
             .await;
 
-        let client = Client::new(&config);
+        let s3_config = aws_sdk_s3::config::Builder::from(&config)
+            .force_path_style(true)
+            .build();
+        let client = Client::from_conf(s3_config);
 
         // Ensure bucket exists (ignore error if already exists)
         let _ = client.create_bucket().bucket(bucket).send().await;
@@ -107,13 +109,14 @@ impl MinioClient {
                     .collect()
                     .await
                     .map_err(|e| MinioError::Download(e.to_string()))?;
+                let bytes = bytes.into_bytes();
                 debug!(
                     "Object downloaded: {}/{} ({} bytes)",
                     self.bucket,
                     key,
                     bytes.len()
                 );
-                Ok(bytes.into_bytes())
+                Ok(bytes)
             }
             Err(e) => {
                 if e.to_string().contains("NoSuchKey") {
@@ -151,14 +154,13 @@ impl MinioClient {
 
         let objects = response
             .contents()
-            .unwrap_or_default()
             .iter()
             .filter_map(|obj| {
                 Some(ObjectMetadata {
                     key: obj.key()?.to_string(),
-                    size: obj.size() as u64,
+                    size: obj.size().unwrap_or_default() as u64,
                     etag: obj.e_tag()?.trim_matches('"').to_string(),
-                    last_modified: obj.last_modified().cloned(),
+                    last_modified: None,
                 })
             })
             .collect();

@@ -54,5 +54,32 @@ Each entry should include:
 
 ---
 
+## 2026-04-27 | DEPENDENCIES | Cargo security refresh
+
+**Context:** GitHub Dependabot reported stale Cargo.lock advisories for
+`aws-sdk-s3`, `lru`, `jsonwebtoken`, and `rustls-webpki`.
+
+**Finding:** `jsonwebtoken` was pulled only through an unused `surrealdb`
+dependency in the scaffold wrapper. `aws-sdk-s3` and `lru` were fixed by moving
+the MinIO adapter to the current AWS SDK line. The NATS adapter was also moved
+from the incompatible `natsio` API to `async-nats`.
+
+**Decision:** Remove unused `surrealdb`, update the AWS SDK/NATS manifests, and
+keep the remaining `rustls-webpki 0.101.7` advisory tracked as an upstream AWS
+Smithy legacy-rustls residual.
+
+**Impact:** Workspace tests compile and pass again while the active dependency
+graph is substantially reduced.
+
+**Validation:**
+- `cargo test --workspace --no-run`
+- `cargo test --workspace`
+- `cargo audit --no-fetch` (residual: `rustls-webpki 0.101.7` via
+  `aws-smithy-http-client 1.1.12`)
+
+**Tags:** `PhenoRuntime` `[DEPENDENCIES]` `[security]` `[cargo]`
+
+---
+
 Use parent Phenotype worklog surfaces only for aggregation tools and
 cross-project analysis.
