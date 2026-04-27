@@ -9,10 +9,12 @@ Extends parent governance. See the following for canonical definitions:
 ## Project Overview
 
 - **Name:** PhenoRuntime
-- **Description:** [Short description from README]
-- **Location:** [Relative path in repos]
-- **Language Stack:** [Primary languages]
-- **Status:** [Active/Archived/Experimental]
+- **Description:** Phenotype runtime scaffold for daemon, service, package, and
+  skill runtime work
+- **Location:** `/Users/kooshapari/CodeProjects/Phenotype/repos/PhenoRuntime`
+- **Language Stack:** Rust workspace plus package metadata for runtime SDK
+  surfaces
+- **Status:** Active scaffold
 
 ## AgilePlus Mandate
 
