@@ -1,0 +1,4 @@
+# cargo-semver-checks configuration
+# See: https://github.com/俺以外/cargo-semver-checks
+
+version = 1
