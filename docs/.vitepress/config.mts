@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "PhenoRuntime",
   description: "Runtime substrate and adapter layer for the Phenotype ecosystem",
+  base: process.env.GITHUB_PAGES === "true" ? "/PhenoRuntime/" : "/",
   cleanUrls: true,
   themeConfig: {
     nav: [
