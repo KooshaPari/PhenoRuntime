@@ -1,5 +1,6 @@
 # PhenoRuntime
 
+[![AI Slop Inside](https://sladge.net/badge.svg)](https://sladge.net)
 [![License: MIT or Apache-2.0](https://img.shields.io/badge/License-MIT%20or%20Apache--2.0-yellow.svg)](LICENSE-MIT)
 [![CI](https://github.com/KooshaPari/PhenoRuntime/actions/workflows/ci.yml/badge.svg)](https://github.com/KooshaPari/PhenoRuntime/actions/workflows/ci.yml)
 [![Rust](https://img.shields.io/badge/rust-1.75%2B-orange.svg)](https://www.rust-lang.org)
