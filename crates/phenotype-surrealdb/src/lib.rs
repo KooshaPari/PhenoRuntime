@@ -11,6 +11,7 @@ use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
 /// PhenoSurreal - SurrealDB wrapper with Pheno extensions
+#[allow(dead_code)]
 pub struct PhenoSurreal {
     path: String,
 }
